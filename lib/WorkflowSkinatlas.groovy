@@ -2,7 +2,7 @@
 // This file holds several functions specific to the workflow/cutandrun.nf in the nf-core/cutandrun pipeline
 //
 
-class WorkflowCutandrun {
+class WorkflowSkinatlas {
 
     //
     // Check and validate parameters
