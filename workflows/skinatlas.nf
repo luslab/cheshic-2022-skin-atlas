@@ -49,7 +49,7 @@ workflow SKINATLAS {
     INPUT_CHECK (
         ch_input
     )
-    INPUT_CHECK.out.folders | view
+    //INPUT_CHECK.out.folders | view
 }
 
 ////////////////////////////////////////////////////
