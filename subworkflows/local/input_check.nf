@@ -2,21 +2,25 @@
  * Check input samplesheet and get read channels
  */
 
+include { SAMPLESHEET_CHECK } from '../../modules/local/samplesheet_check'
+
 workflow INPUT_CHECK {
     take:
     samplesheet // file: /path/to/samplesheet.csv
 
     main:
-    samplesheet
+    SAMPLESHEET_CHECK ( samplesheet )
+
+    SAMPLESHEET_CHECK.out.csv
         .splitCsv ( header:true, sep:"," )
         .map { get_samplesheet_paths(it) }
-        .set { folders }
+        .set { ch_folders }
 
     emit:
-    folders // channel: [ val(meta), [ folders ] ]
+    folders = ch_folders // channel: [ val(meta), [ folders ] ]
+    versions = SAMPLESHEET_CHECK.out.versions
 }
 
-// Function to get list of [ meta, [ fastq_1, fastq_2 ] ]
 def get_samplesheet_paths(LinkedHashMap row) {
     def meta = [:]
     meta.id = row.id

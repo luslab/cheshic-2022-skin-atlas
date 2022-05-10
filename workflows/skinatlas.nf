@@ -19,8 +19,6 @@ for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true
 // Check mandatory parameters that cannot be checked in the groovy lib as we want a channel for them
 if (params.input) { ch_input = file(params.input) } else { exit 1, "Input samplesheet not specified!" }
 
-ch_input | view
-
 /*
 ========================================================================================
     CONFIG FILES
@@ -48,11 +46,10 @@ include { INPUT_CHECK } from "../subworkflows/local/input_check"
 */
 
 workflow SKINATLAS {
-
-//     INPUT_CHECK (
-//         ch_input
-//     )
-//     INPUT_CHECK.folders | view
+    INPUT_CHECK (
+        ch_input
+    )
+    INPUT_CHECK.out.folders | view
 }
 
 ////////////////////////////////////////////////////
