@@ -8,31 +8,31 @@ class WorkflowSkinatlas {
     // Check and validate parameters
     //
     public static void initialise(params, log) {
-        genomeExistsError(params, log)
+        // genomeExistsError(params, log)
 
-        if (!params.fasta) {
-            log.error "Genome fasta file not specified with e.g. '--fasta genome.fa' or via a detectable config file."
-            System.exit(1)
-        }
+        // if (!params.fasta) {
+        //     log.error "Genome fasta file not specified with e.g. '--fasta genome.fa' or via a detectable config file."
+        //     System.exit(1)
+        // }
 
-        if (!params.spikein_fasta) {
-            log.error "Spike-in fasta file not specified with e.g. '--spikein_fasta genome.fa' or via a detectable config file."
-            System.exit(1)
-        }
+        // if (!params.spikein_fasta) {
+        //     log.error "Spike-in fasta file not specified with e.g. '--spikein_fasta genome.fa' or via a detectable config file."
+        //     System.exit(1)
+        // }
 
-        if (!params.gtf) {
-            log.error "No GTF annotation specified!"
-            System.exit(1)
-        }
+        // if (!params.gtf) {
+        //     log.error "No GTF annotation specified!"
+        //     System.exit(1)
+        // }
 
-        if (params.gtf) {
-            if (params.genome == 'GRCh38' && params.gtf.contains('Homo_sapiens/NCBI/GRCh38/Annotation/Genes/genes.gtf')) {
-                ncbiGenomeWarn(log)
-            }
-            if (params.gtf.contains('/UCSC/') && params.gtf.contains('Annotation/Genes/genes.gtf')) {
-                ucscGenomeWarn(log)
-            }
-        }
+        // if (params.gtf) {
+        //     if (params.genome == 'GRCh38' && params.gtf.contains('Homo_sapiens/NCBI/GRCh38/Annotation/Genes/genes.gtf')) {
+        //         ncbiGenomeWarn(log)
+        //     }
+        //     if (params.gtf.contains('/UCSC/') && params.gtf.contains('Annotation/Genes/genes.gtf')) {
+        //         ucscGenomeWarn(log)
+        //     }
+        // }
     }
 
     //

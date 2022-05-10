@@ -8,7 +8,18 @@
 def summary_params = NfcoreSchema.paramsSummaryMap(workflow, params)
 
 // Validate input parameters in specialised library
-WorkflowSk inatlas.initialise(params, log)
+WorkflowSkinatlas.initialise(params, log)
+
+// Check input path parameters to see if the files exist if they have been specified
+checkPathParamList = [
+    params.input
+]
+for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
+
+// Check mandatory parameters that cannot be checked in the groovy lib as we want a channel for them
+if (params.input) { ch_input = file(params.input) } else { exit 1, "Input samplesheet not specified!" }
+
+ch_input | view
 
 /*
 ========================================================================================
@@ -28,6 +39,7 @@ WorkflowSk inatlas.initialise(params, log)
 ========================================================================================
 */
 
+include { INPUT_CHECK } from "../subworkflows/local/input_check"
 
 /*
 ========================================================================================
@@ -37,6 +49,10 @@ WorkflowSk inatlas.initialise(params, log)
 
 workflow SKINATLAS {
 
+//     INPUT_CHECK (
+//         ch_input
+//     )
+//     INPUT_CHECK.folders | view
 }
 
 ////////////////////////////////////////////////////
