@@ -14,17 +14,17 @@ workflow INPUT_CHECK {
     SAMPLESHEET_CHECK.out.csv
         .splitCsv ( header:true, sep:"," )
         .map { get_samplesheet_paths(it) }
-        .set { ch_folders }
+        .set { ch_data }
 
     emit:
-    folders = ch_folders // channel: [ val(meta), [ folders ] ]
+    data = ch_data // channel: [ val(meta), [ data ] ]
     versions = SAMPLESHEET_CHECK.out.versions
 }
 
 def get_samplesheet_paths(LinkedHashMap row) {
     def meta = [:]
     meta.id = row.id
-    array = [ meta, row.folder ]
+    array = [ meta, row.path ]
 
     return array
 }

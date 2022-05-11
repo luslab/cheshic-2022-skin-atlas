@@ -58,11 +58,13 @@ workflow SKINATLAS {
     INPUT_CHECK (
         ch_input
     )
-    //INPUT_CHECK.out.folders | view
+    INPUT_CHECK.out.data | view
 
-    R_SEURAT_CREATE_OBJECTS (
-        INPUT_CHECK.out.folders
-    )
+    if(!params.rds_mode) {
+        R_SEURAT_CREATE_OBJECTS (
+            INPUT_CHECK.out.data
+        )
+    }
 }
 
 ////////////////////////////////////////////////////

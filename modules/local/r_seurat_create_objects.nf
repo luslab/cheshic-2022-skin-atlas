@@ -8,7 +8,7 @@ process R_SEURAT_CREATE_OBJECTS {
     tuple val(meta), path(folder)
 
     output:
-    path '*.rds', emit: rds
+    tuple val(meta), path('*.rds'), emit: rds
 
     when:
     task.ext.when == null || task.ext.when
