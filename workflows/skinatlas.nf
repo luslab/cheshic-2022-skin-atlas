@@ -33,7 +33,15 @@ if (params.input) { ch_input = file(params.input) } else { exit 1, "Input sample
 
 /*
 ========================================================================================
-    IMPORT LOCAL MODULES/SUBWORKFLOWS
+    IMPORT MODULES
+========================================================================================
+*/
+
+include { R_SEURAT_CREATE_OBJECTS } from "../modules/local/r_seurat_create_objects"
+
+/*
+========================================================================================
+    IMPORT SUBWORKFLOWS
 ========================================================================================
 */
 
@@ -46,10 +54,15 @@ include { INPUT_CHECK } from "../subworkflows/local/input_check"
 */
 
 workflow SKINATLAS {
+
     INPUT_CHECK (
         ch_input
     )
     //INPUT_CHECK.out.folders | view
+
+    R_SEURAT_CREATE_OBJECTS (
+        INPUT_CHECK.out.folders
+    )
 }
 
 ////////////////////////////////////////////////////

@@ -14,6 +14,13 @@ RUN apt-get update \
     #   libfontconfig1-dev \
     #   libfribidi-dev
 
+# Install and unpack webfonts for plotting with Arial
+# RUN wget https://www.freedesktop.org/software/fontconfig/webfonts/webfonts.tar.gz && \
+#     tar -xzf webfonts.tar.gz && \
+#     cd msfonts/ && \
+#     cabextract *.exe && \
+#     cp *.ttf *.TTF /usr/share/fonts/
+
 # Add conda to $PATH
 ENV PATH /opt/conda/bin:$PATH
 
@@ -60,7 +67,9 @@ RUN R -e 'BiocManager::install("apeglm")'
 # Install git builds
 RUN R -e "devtools::install_github('dmcable/spacexr', build_vignettes = FALSE)"
 
-
+RUN conda install --name packages -c conda-forge r-getopt
+ 
+RUN R -e "devtools::install_github('alexthiery/scHelper@v0.2.4', dependencies = TRUE)"
 
 # ENV R_HOME /opt/conda/envs/packages/bin/R
 
