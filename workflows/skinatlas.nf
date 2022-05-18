@@ -94,7 +94,7 @@ workflow SKINATLAS {
 
     // Integration QC
     R_INTEGRATION_QC (
-        R_INTEGRATION_QC.out.files
+        R_INTEGRATION.out.files
     )
     //R_INTEGRATION_QC.out.files | view
 }
