@@ -37,7 +37,8 @@ if (params.input) { ch_input = file(params.input) } else { exit 1, "Input sample
 ========================================================================================
 */
 
-include { R_SEURAT_CREATE_OBJECTS } from "../modules/local/r_seurat_create_objects"
+include { R_SEURAT_CREATE_OBJECTS      } from "../modules/local/r_seurat_create_objects"
+include { R_GENERAL as R_PREPROCESSING } from "../modules/local/r_general"
 
 /*
 ========================================================================================
@@ -55,18 +56,33 @@ include { INPUT_CHECK } from "../subworkflows/local/input_check"
 
 workflow SKINATLAS {
 
+    // Check input
     INPUT_CHECK (
         ch_input
     )
     //INPUT_CHECK.out.data | view
 
+    // Create intial seurat objects
     if(!params.rds_mode) {
         R_SEURAT_CREATE_OBJECTS (
             INPUT_CHECK.out.data
         )
     }
+    //R_SEURAT_CREATE_OBJECTS.out.rds | view
 
-    
+    // Create merged list of seurat objects
+    R_SEURAT_CREATE_OBJECTS.out.rds
+        .map { row -> [row[1]] }
+        .collect()
+        .map { row -> [[id:params.project_name], row] }
+        .set { ch_counts }   
+    //ch_counts | view
+
+    // Pre-process data and merge
+    R_PREPROCESSING (
+        ch_counts
+    )
+    R_PREPROCESSING.out.files | view
 }
 
 ////////////////////////////////////////////////////

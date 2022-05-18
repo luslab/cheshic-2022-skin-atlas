@@ -70,6 +70,9 @@ RUN R -e "devtools::install_github('dmcable/spacexr', build_vignettes = FALSE)"
 RUN conda install --name packages -c conda-forge r-getopt
  
 RUN R -e "devtools::install_github('alexthiery/scHelper@v0.2.4', dependencies = TRUE)"
+RUN R -e "devtools::install_github('carmonalab/STACAS', dependencies = TRUE)"
+
+RUN conda install --name packages -c conda-forge r-clustree
 
 # ENV R_HOME /opt/conda/envs/packages/bin/R
 
