@@ -73,6 +73,8 @@ RUN R -e "devtools::install_github('alexthiery/scHelper@v0.2.4', dependencies = 
 RUN R -e "devtools::install_github('carmonalab/STACAS', dependencies = TRUE)"
 
 RUN conda install --name packages -c conda-forge r-clustree
+RUN conda install --name packages -c conda-forge r-pheatmap
+RUN conda install --name packages -c conda-forge r-rcolorbrewer
 
 # ENV R_HOME /opt/conda/envs/packages/bin/R
 
