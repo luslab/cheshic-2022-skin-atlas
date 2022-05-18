@@ -1,6 +1,6 @@
 process R_GENERAL {
     tag "$meta.id"
-    label 'process_min'
+    label 'process_high'
 
     container "chrischeshire/skinatlas-r:latest"
 
