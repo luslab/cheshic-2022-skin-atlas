@@ -1,3 +1,3 @@
 id,path
-skin_1,/Users/cheshic/dev/test_data/2022_skin_atlas_local/pipeline_test/WS_SKN_KCL10525741/filtered_feature_bc_matrix
-skin_2,/Users/cheshic/dev/test_data/2022_skin_atlas_local/pipeline_test/WS_SKN_KCL10525747/filtered_feature_bc_matrix
+SKIN_FOREHEAD_1234-1,/Users/cheshic/dev/test_data/2022_skin_atlas_local/pipeline_test/WS_SKN_KCL10525741/filtered_feature_bc_matrix
+SKIN_EAR_5678-2,/Users/cheshic/dev/test_data/2022_skin_atlas_local/pipeline_test/WS_SKN_KCL10525747/filtered_feature_bc_matrix
