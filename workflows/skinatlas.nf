@@ -37,8 +37,10 @@ if (params.input) { ch_input = file(params.input) } else { exit 1, "Input sample
 ========================================================================================
 */
 
-include { R_SEURAT_CREATE_OBJECTS      } from "../modules/local/r_seurat_create_objects"
-include { R_GENERAL as R_PREPROCESSING } from "../modules/local/r_general"
+include { R_SEURAT_CREATE_OBJECTS       } from "../modules/local/r_seurat_create_objects"
+include { R_GENERAL as R_PREPROCESSING  } from "../modules/local/r_general"
+include { R_GENERAL as R_INTEGRATION    } from "../modules/local/r_general"
+include { R_GENERAL as R_INTEGRATION_QC } from "../modules/local/r_general"
 
 /*
 ========================================================================================
@@ -82,7 +84,19 @@ workflow SKINATLAS {
     R_PREPROCESSING (
         ch_counts
     )
-    R_PREPROCESSING.out.files | view
+    //R_PREPROCESSING.out.files | view
+
+    // Integration
+    R_INTEGRATION (
+        R_PREPROCESSING.out.files
+    )
+    //R_INTEGRATION.out.files | view
+
+    // Integration QC
+    R_INTEGRATION_QC (
+        R_INTEGRATION_QC.out.files
+    )
+    //R_INTEGRATION_QC.out.files | view
 }
 
 ////////////////////////////////////////////////////

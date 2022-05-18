@@ -22,5 +22,6 @@ process R_GENERAL {
     --id $meta.id \
     --runtype nextflow \
     $args
+    rm -r input
     """
 }
