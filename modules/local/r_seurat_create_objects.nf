@@ -1,6 +1,6 @@
 process R_SEURAT_CREATE_OBJECTS {
     tag "$meta.id"
-    label 'process_min'
+    label 'process_medium'
 
     container "chrischeshire/skinatlas-r:latest"
 
