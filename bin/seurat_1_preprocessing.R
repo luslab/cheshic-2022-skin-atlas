@@ -41,7 +41,7 @@ opt = getopt(spec)
     
     # Multi-core when running from command line
     plan("multicore", workers = ncores)
-    options(future.globals.maxSize = 64* 1024^3)
+    options(future.globals.maxSize=+Inf)
 
   } else {
     stop("--runtype must be set to 'nextflow'")
